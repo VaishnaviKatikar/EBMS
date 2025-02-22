@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #ADD8E6; /* Light blue */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            color: #000;
+            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            font-size: 22px;
+        }
+
+        .nav-item {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .nav-item a {
+            color: black;
+            padding: 12px;
+            display: block;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-item a:hover {
+            background-color: #87CEEB; /* Darker light blue */
+        }
+
+        .nav-item i {
+            margin-right: 10px;
+        }
+
+        /* Main content area */
+        .main-content {
+            width: 50%;
+            padding: 40px;
+            background-color: #f4f4f4;
+        }
+
+        .main-content h1 {
+            color: black;
+            text-align: left;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 25px;
+            margin: 20px 0;
+            background-color: #ADD8E6; /* Light blue */
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            font-size: 18px;
+        }
+
+        .button i {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .button:hover {
+            background-color: #87CEEB;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Collapsible content */
+        .collapsible {
+            background-color: #ADD8E6;
+            color: black;
+            cursor: pointer;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .collapsible:hover {
+            background-color: #87CEEB;
+        }
+
+        .collapsible::after {
+            content: '\25BC'; /* Down arrow */
+            font-size: 16px;
+            float: right;
+            margin-left: 10px;
+        }
+
+        .collapsible.active::after {
+            content: '\25B2'; /* Up arrow */
+        }
+
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f9f9f9;
+            border-top: 1px solid #ccc;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #dddddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #ADD8E6;
+            color: black;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #777;
+        }
+    </style>
+    <!-- Include Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Sidebar for Customer Attributes -->
+    <div class="sidebar">
+        <h2>Customer Attributes</h2>
+
+        <!-- Collapsible Sections for Profile Information -->
+
+        <div class="nav-item">
+            <a href="{{ url_for('view_bills') }}"><i class="fas fa-comment-alt"></i> View Bills</a>
+        </div>
+        
+        <div class="nav-item">
+            <a href="{{ url_for('feedback') }}"><i class="fas fa-comment-alt"></i> Submit Feedback</a>
+        </div>
+        <div class="nav-item"></div>
+            <a href="{{ url_for('bill_estimate') }}"><i class="fas fa-comment-alt"></i> Bill Calculator</a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Welcome to Your Dashboard</h1>
+
+        <!-- Example of card components for sections -->
+        <div class="card">
+            <h2>Recent Bills</h2>
+            <p>Check your recent bills and payment statuses below.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bill ID</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#12345</td>
+                        <td>Oct 1, 2024</td>
+                        <td>$250.00</td>
+                        <td>Paid</td>
+                    </tr>
+                    <tr>
+                        <td>#12346</td>
+                        <td>Sept 15, 2024</td>
+                        <td>$300.00</td>
+                        <td>Unpaid</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Customer Dashboard &copy; 2024</p>
+    </div>
+
+    <script>
+        // JavaScript for collapsible content
+        const collapsibles = document.querySelectorAll('.collapsible');
+
+        collapsibles.forEach((collapsible) => {
+            collapsible.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

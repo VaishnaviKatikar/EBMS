@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden; /* Prevent scrolling when sidebar is toggled */
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #ADD8E6; /* Light blue */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .nav-item {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .nav-item a {
+            color: black;
+            padding: 12px;
+            display: block;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .nav-item a:hover {
+            background-color: #87CEEB; /* Darker light blue */
+        }
+
+        .main-content {
+            flex-grow: 1;
+            background-color: #f0f4f8;
+            padding: 40px;
+            margin-left: 250px; /* Adjust margin to make space for sidebar */
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content h1 {
+            color: black;
+            text-align: left;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 25px;
+            margin: 20px 0;
+            background-color: #ADD8E6; /* Light blue */
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            font-size: 18px;
+        }
+
+        .button i {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .button:hover {
+            background-color: #87CEEB;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: black;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f4f8;
+            color: #777;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+                padding: 15px;
+            }
+
+            .main-content {
+                margin-left: 0; /* Full width for mobile */
+            }
+
+        }
+    </style>
+    <!-- Include Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <h2>Employee Dashboard</h2>
+
+        <div class="nav-item">
+            <a href="/templates/meter_reading.html"><i class="fas fa-tachometer-alt"></i> Meter Reading</a>
+        </div>
+        <div class="nav-item">
+            <a href="/templates/complaints.html"><i class="fas fa-comments"></i> View Complaints</a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+        <h1>Welcome, Employee</h1>
+
+        <!-- Example of card components for sections -->
+        <div class="card">
+            <h2>Meter Reading</h2>
+            <p>Manage and record meter readings efficiently using this section.</p>
+            <a href="/templates/meter_reading.html" class="button"><i class="fas fa-tachometer-alt"></i> Go to Meter Reading</a>
+        </div>
+
+        <div class="card">
+            <h2>View Complaints</h2>
+            <p>View and respond to customer complaints in this section.</p>
+            <a href="/templates/complaints.html" class="button"><i class="fas fa-comments"></i> View Complaints</a>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Employee Dashboard &copy; 2024</p>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            if (sidebar.classList.contains('open')) {
+                mainContent.style.marginLeft = '250px'; // Adjust margin when sidebar is open
+            } else {
+                mainContent.style.marginLeft = '0'; // Full width when sidebar is closed
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimated Electricity Bill Calculation - Customer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .result {
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .result p {
+            margin: 0;
+            padding: 5px 0;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Estimate Your Electricity Bill</h1>
+
+        <form id="estimateForm">
+            <!-- Customer Estimated Reading -->
+            <label for="prevReading">Previous Meter Reading (kWh):</label>
+            <input type="number" id="prevReading" name="prevReading" placeholder="Enter Previous Reading" required>
+
+            <label for="estimatedReading">Estimated Current Meter Reading (kWh):</label>
+            <input type="number" id="estimatedReading" name="estimatedReading" placeholder="Enter Estimated Reading" required>
+
+            <!-- Tariff Rate -->
+            <label for="tariff">Tariff Rate (per kWh):</label>
+            <input type="number" id="tariff" name="tariff" placeholder="Enter Tariff Rate" required>
+
+            <!-- Calculation Button -->
+            <button type="button" onclick="calculateEstimate()">Calculate Estimate</button>
+        </form>
+
+        <!-- Result Section -->
+        <div class="result" id="result">
+            <p id="unitsConsumed"></p>
+            <p id="totalEstimate"></p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript function to calculate the estimated bill
+        function calculateEstimate() {
+            const prevReading = parseFloat(document.getElementById('prevReading').value);
+            const estimatedReading = parseFloat(document.getElementById('estimatedReading').value);
+            const tariff = parseFloat(document.getElementById('tariff').value);
+
+            // Calculate units consumed
+            const unitsConsumed = estimatedReading - prevReading;
+
+            // Calculate the estimated bill amount
+            const totalEstimate = unitsConsumed * tariff;
+
+            // Display the results
+            document.getElementById('unitsConsumed').innerHTML = "Estimated Units Consumed: " + unitsConsumed + " kWh";
+            document.getElementById('totalEstimate').innerHTML = "Estimated Total Bill: ₹" + totalEstimate.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
